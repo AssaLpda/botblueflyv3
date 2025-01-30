@@ -186,7 +186,9 @@
         }
 
         // Cargar los datos al cargar la página
-        document.addEventListener('DOMContentLoaded', loadData);
+        document.addEventListener('DOMContentLoaded', function() {
+            loadData();
+        });
 
         let isEditing = false;
 
@@ -220,4 +222,5 @@
     </script>
 </body>
 </html>
+
 
