@@ -12,6 +12,30 @@ document.addEventListener('DOMContentLoaded', function() {
     
     let isEditing = false;
 
+    // Función para guardar los datos en localStorage
+    function saveData() {
+        localStorage.setItem('accountHolder', accountHolder.value);
+        localStorage.setItem('cbu', cbu.value);
+        localStorage.setItem('alias', alias.value);
+    }
+
+    // Función para cargar los datos desde localStorage
+    function loadData() {
+        if (localStorage.getItem('accountHolder')) {
+            accountHolder.value = localStorage.getItem('accountHolder');
+        }
+        if (localStorage.getItem('cbu')) {
+            cbu.value = localStorage.getItem('cbu');
+        }
+        if (localStorage.getItem('alias')) {
+            alias.value = localStorage.getItem('alias');
+        }
+    }
+
+    // Cargar los datos al inicio de la página
+    loadData();
+
+    // Función para activar o desactivar el modo de edición
     function toggleEditMode() {
         const accountHolderLabel = document.querySelector('label[for="accountHolder"]');
         const cbuLabel = document.querySelector('label[for="cbu"]');
@@ -25,6 +49,7 @@ document.addEventListener('DOMContentLoaded', function() {
             accountHolder.disabled = true;
             cbu.disabled = true;
             alias.disabled = true;
+            saveData();  // Guardar los datos después de editar
         } else {
             editButton.innerHTML = '<i class="bi bi-save"></i> Guardar';
             accountHolder.disabled = false;
@@ -35,6 +60,7 @@ document.addEventListener('DOMContentLoaded', function() {
         isEditing = !isEditing;
     }
 
+    // Función para obtener un saludo aleatorio
     function getRandomGreeting() {
         const userName = username.value.trim();
         const greetings = [
@@ -62,6 +88,7 @@ document.addEventListener('DOMContentLoaded', function() {
         return greetings[randomIndex];
     }
 
+    // Función para obtener un mensaje de advertencia aleatorio
     function getRandomWarningMessage() {
         const warningMessages = [
             "*¡Acordate de verificar el ALIAS o CBU antes de transferir!*⚠️❗️",
@@ -96,22 +123,21 @@ document.addEventListener('DOMContentLoaded', function() {
         return data;
     }
 
-    // Modificación: Compactar el formato, sin saltos innecesarios.
+    // Generar el mensaje compacto
     function generateCompactMessage() {
         const greeting = getRandomGreeting();
         const data = shuffleData();
 
-        // Crear el mensaje con los datos compactos (sin espacios excesivos)
         let message = `${greeting}\n\n`;
         data.forEach(item => {
-            message += `${item.label}: ${item.value}\n`;  // No se añaden saltos adicionales
+            message += `${item.label}: ${item.value}\n`;
         });
 
         message += `\n${getRandomWarningMessage()}`;
-        return message.trim();  // Trim para eliminar posibles saltos de línea extra al final
+        return message.trim();
     }
 
-    // Modificación: Compactar el formato del mensaje detallado.
+    // Generar el mensaje detallado
     function generateDetailedMessage() {
         const data = shuffleData();
         const greeting = getRandomGreeting();
@@ -123,6 +149,7 @@ document.addEventListener('DOMContentLoaded', function() {
                `${getRandomWarningMessage()}`.trim();
     }
 
+    // Generar mensaje sin saludo
     function generateMessageWithoutGreeting() {
         const startMessages = [
             "*Heey, te dejo estos datos para cargar*😀:",
@@ -155,6 +182,7 @@ document.addEventListener('DOMContentLoaded', function() {
                `${getRandomWarningMessage()}`;
     }
 
+    // Asignar eventos a los botones
     cbuButton.addEventListener('click', async function() {
         let message;
         if (Math.random() < 0.5) {
