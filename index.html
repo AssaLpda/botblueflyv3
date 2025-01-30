@@ -40,13 +40,16 @@
             const password = document.getElementById('pwd').value;
 
             // Credenciales predefinidas
-            const validUser = "Assa";
-            const validPassword = "Hola123";
+            const validUser1 = "Assa";
+            const validPassword1 = "Hola123";
+            const validUser2 = "Anto";
+            const validPassword2 = "Hola123";
 
             // Verificar las credenciales
-            if (userName === validUser && password === validPassword) {
+            if ((userName === validUser1 && password === validPassword1) || 
+                (userName === validUser2 && password === validPassword2)) {
                 // Si las credenciales son correctas, redirigir al bot.html
-                window.location.href = 'bot.html';  // Cambié esto para que apunte correctamente
+                window.location.href = 'bot.html';  // Redirige a bot.html
             } else {
                 // Si son incorrectas, mostrar un mensaje de error
                 alert('Credenciales incorrectas. Por favor, intenta nuevamente.');
@@ -55,3 +58,4 @@
     </script>
 </body>
 </html>
+
