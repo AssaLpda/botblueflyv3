@@ -164,6 +164,60 @@
                 icon.classList.replace('bi-sun', 'bi-moon');
             }
         });
+
+        // Guardar los datos editados en localStorage
+        function saveData() {
+            localStorage.setItem('accountHolder', document.getElementById('accountHolder').value);
+            localStorage.setItem('cbu', document.getElementById('cbu').value);
+            localStorage.setItem('alias', document.getElementById('alias').value);
+        }
+
+        // Cargar los datos guardados desde localStorage
+        function loadData() {
+            if (localStorage.getItem('accountHolder')) {
+                document.getElementById('accountHolder').value = localStorage.getItem('accountHolder');
+            }
+            if (localStorage.getItem('cbu')) {
+                document.getElementById('cbu').value = localStorage.getItem('cbu');
+            }
+            if (localStorage.getItem('alias')) {
+                document.getElementById('alias').value = localStorage.getItem('alias');
+            }
+        }
+
+        // Cargar los datos al cargar la página
+        document.addEventListener('DOMContentLoaded', loadData);
+
+        let isEditing = false;
+
+        function toggleEditMode() {
+            const accountHolderLabel = document.querySelector('label[for="accountHolder"]');
+            const cbuLabel = document.querySelector('label[for="cbu"]');
+            const aliasLabel = document.querySelector('label[for="alias"]');
+            
+            if (isEditing) {
+                editButton.innerHTML = '<i class="bi bi-pencil-square"></i> Editar';
+                accountHolderLabel.textContent = 'Titular de la cuenta: ' + accountHolder.value;
+                cbuLabel.textContent = 'CBU: ' + cbu.value;
+                aliasLabel.textContent = 'Alias: ' + alias.value;
+                accountHolder.disabled = true;
+                cbu.disabled = true;
+                alias.disabled = true;
+                saveData();  // Guardar los datos
+            } else {
+                editButton.innerHTML = '<i class="bi bi-save"></i> Guardar';
+                accountHolder.disabled = false;
+                cbu.disabled = false;
+                alias.disabled = false;
+            }
+
+            isEditing = !isEditing;
+        }
+
+        // Asignar la acción al botón de editar
+        const editButton = document.getElementById('editButton');
+        editButton.addEventListener('click', toggleEditMode);
     </script>
 </body>
 </html>
+
