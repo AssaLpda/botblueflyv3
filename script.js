@@ -3,7 +3,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const cbuButton = document.getElementById('cbuButton');
     const noSaludoButton = document.getElementById('noSaludoButton');
     const editButton = document.getElementById('editButton');
-    const saludoFButton = document.getElementById('saludoFButton'); // Nuevo botón para Saludo F
+    const saludoFemButton = document.getElementById('saludoFemButton'); // Nuevo botón Saludo Fem
+    const infoG1Button = document.getElementById('infoG1Button'); // Nuevo botón Info G1
     
     // Campos de usuario
     const username = document.getElementById('username');
@@ -61,21 +62,28 @@ document.addEventListener('DOMContentLoaded', function() {
         isEditing = !isEditing;
     }
 
-    // Función para obtener un saludo aleatorio (incluye los nuevos saludos para "Saludo F")
-    function getRandomGreetingF() {
+    // Función para obtener un saludo aleatorio
+    function getRandomGreeting() {
         const userName = username.value.trim();
         const greetings = [
-            `¡Holisss${userName ? ` ${userName}` : ''} ¿Cómo va todo? ❤️`,
-            `¡Hola, reinaa${userName ? ` ${userName}` : ''}! ¿Cómo va todo? 😄`,
-            `¡Holaaa, bellaa${userName ? ` ${userName}` : ''}! Te paso los datos que pedis 😊`,
-            `¡Qué tal lindaa${userName ? `, ${userName}` : ''}❤️ Acá tenes los datos`,
-            `¡Holaaa, amigaa${userName ? ` ${userName}` : ''}! Podes enviar por acá ✅`,
-            `¡Holaaa, bellaa${userName ? ` ${userName}` : ''}! Te dejo los datos abajo⬇️`,
-            `¡Hola, reinaa${userName ? ` ${userName}` : ''}! ¿Cómo estás? 😘 Te envie la info`,
-            `¡Buenaas amigaa${userName ? ` ${userName}` : ''}! ¿Todo en orden? 😊`,
-            `¡Holaaa, amigaa${userName ? ` ${userName}` : ''}! Aquí te paso la info que necesitás ➡️`,
-            `¡Como estas amiga${userName ? `, ${userName}` : ''}, todo bien? Aquí te mando lo que pediste 📲`,
-            `¡Holaaa, reinaa${userName ? ` ${userName}` : ''}! Te paso los datos para que los puedas enviar👇`
+            `¡Holaaa${userName ? ` ${userName}` : ''}! ¿Cómo estás? 😊`,
+            `¡Qué tal${userName ? `, ${userName}` : ''}❤️ ¿Cómo te va?`,
+            `¡Buenas buenaas${userName ? `, ${userName}` : ''}, como estas?🙌`,
+            `¡Hola${userName ? ` ${userName}` : ''}! ¿Cómo va todo? 😄`,
+            `¡Hola${userName ? ` ${userName}` : ''}!  Ahora te paso❤️`,
+            `¡Buenas${userName ? `, ${userName}` : ''}! ¿Qué tal todo?`,
+            `¡Como estas${userName ? `, ${userName}` : ''}?`,
+            `¡Buenas buenaas${userName ? `, ${userName}` : ''}!!🙌`,
+            `¡Holaaa${userName ? ` ${userName}` : ''} 😄`,
+            `¡Que ondaa${userName ? ` ${userName}` : ''} 😄`,
+            `¡Holiis${userName ? ` ${userName}` : ''}! Te enviee ❤️`,
+            `¡Holaaa${userName ? ` ${userName}` : ''}! Te dejo los datos abajo⬇️ `,
+            `¡Buenaas${userName ? ` ${userName}` : ''}! Te dejo info abajo `,
+            `¡Como estas${userName ? ` ${userName}` : ''}? Te envio la info `,
+            `¡Holaaa${userName ? ` ${userName}` : ''}! Podes enviar aca✅ `,
+            `¡Holaaa${userName ? ` ${userName}` : ''}! Te paso los datos para tu carga 😊`,
+            `¡Buenaas${userName ? ` ${userName}` : ''}! Ahora te paso la data✅ `,
+            `¡Heey${userName ? ` ${userName}` : ''} ¿Cómo estás? 😃`
         ];
 
         const randomIndex = Math.floor(Math.random() * greetings.length);
@@ -89,7 +97,7 @@ document.addEventListener('DOMContentLoaded', function() {
             "*No olvides revisar que el CBU o el ALIAS sean correctos antes de realizar la transferencia.*",
             "*Por favor, revisá los datos antes de confirmar la operación✅.*",
             "*Asegúrate de que los datos (ALIAS o CBU) sean correctos antes de proceder*❗️.",
-            "Siempre es recomendable verificar que el CBU o el ALIAS estén correctos antes de hacer la transferencia.⚠️",
+            "Siempre es recomendable verificar que el ALIAS y el CBU estén correctos antes de hacer la transferencia.⚠️",
             "*No te olvides* de comprobar bien los datos antes de enviar el dinero❗️.",
             "Es importante *verificar* que el ALIAS o el CBU sean correctos antes de continuar con la transferencia.",
             "*Revisa* los datos nuevamente para evitar errores en la transferencia.❗",
@@ -106,21 +114,6 @@ document.addEventListener('DOMContentLoaded', function() {
         return warningMessages[randomIndex];
     }
 
-    // Función para generar el mensaje completo con el saludo de Saludo F
-    function generateSaludoFMessage() {
-        const greeting = getRandomGreetingF();
-        const data = shuffleData();
-
-        let message = `${greeting}\n\n`;
-        data.forEach(item => {
-            message += `${item.label}: ${item.value}\n`;
-        });
-
-        message += `\n${getRandomWarningMessage()}`;
-        return message.trim();
-    }
-
-    // Función para mezclar los datos
     function shuffleData() {
         const data = [
             { label: 'CBU', value: cbu.value },
@@ -132,40 +125,14 @@ document.addEventListener('DOMContentLoaded', function() {
         return data;
     }
 
-    // Función para generar el mensaje compacto
-    function generateCompactMessage() {
-        const greeting = getRandomGreeting();
-        const data = shuffleData();
-
-        let message = `${greeting}\n\n`;
-        data.forEach(item => {
-            message += `${item.label}: ${item.value}\n`;
-        });
-
-        message += `\n${getRandomWarningMessage()}`;
-        return message.trim();
-    }
-
-    // Función para generar el mensaje detallado
-    function generateDetailedMessage() {
-        const data = shuffleData();
-        const greeting = getRandomGreeting();
-
-        return `${greeting}\n\n` +
-               `${data[0].label}: ${data[0].value}\n` +
-               `${data[1].label}: ${data[1].value}\n` +
-               `${data[2].label}: ${data[2].value}\n\n` +
-               `${getRandomWarningMessage()}`.trim();
-    }
-
-    // Función para generar mensaje sin saludo
+    // Función para generar el mensaje sin saludo
     function generateMessageWithoutGreeting() {
         const startMessages = [
             "*Heey, te dejo estos datos para cargar*😀:",
             "Podes enviar aca✅:",
             "Te envié la info⬇️⬇️:",
             "Acá tienes los datos que necesitas:✅",
-            "Estos son los datos para que los cargues😊:",
+            "Estos son los datos para que cargues😊:",
             "Aquí tienes la información para cargar📥:",
             "Te paso los datos que necesitas👉📋:",
             "¡Todo listo! Acá están los datos que pediste😊:",
@@ -191,14 +158,118 @@ document.addEventListener('DOMContentLoaded', function() {
                `${getRandomWarningMessage()}`;
     }
 
+    // Generar el mensaje compacto
+    function generateCompactMessage() {
+        const greeting = getRandomGreeting();
+        const data = shuffleData();
+
+        let message = `${greeting}\n\n`;
+        data.forEach(item => {
+            message += `${item.label}: ${item.value}\n`;
+        });
+
+        message += `\n${getRandomWarningMessage()}`;
+        return message.trim();
+    }
+
+    // Generar el mensaje detallado
+    function generateDetailedMessage() {
+        const data = shuffleData();
+        const greeting = getRandomGreeting();
+
+        return `${greeting}\n\n` +
+               `${data[0].label}: ${data[0].value}\n` +
+               `${data[1].label}: ${data[1].value}\n` +
+               `${data[2].label}: ${data[2].value}\n\n` +
+               `${getRandomWarningMessage()}`;
+    }
+
+    // Función para generar el saludo femenino
+    function getRandomFemGreeting() {
+        const femaleGreetings = [
+            "¡Holaa preciosa, ¿cómo estás? 🌸 Te paso los datos.",
+            "¡Hola bella! 🥰 Te pasé los datos, avísame si necesitas algo más.",
+            "¡Buenaaass! 🤗 ¿Todo bien? Te envié lo que pediste.",
+            "¡Hola geniaa! 💖 Te mandé la info.",
+            "¡Holaaa, amigaa! Aquí te paso la info que necesitás ➡️",
+            "¡Como estas amiga, todo bien? Aquí te mando lo que pediste 📲",
+            "Buenas, ¿cómo  va? 😊 ahora te paso la data.",
+            "¡Hola hermosa! Ahí te mandé los datos, cualquier cosa me avisas👀.",
+            "Holiis reinaa!🥰 te pasé para cargar acá⬇️.",
+            "¡Holaaa, bellaa! Te paso los datos que pediste 😊",
+            "¡Amigaa como estas?❤️! Podes enviar por acá ✅",
+            "Buenaas ¿cómo estas hermosa? Te envié lo que pediste.",
+            "¡Holaaa, reinaa! Te paso los datos para que los puedas enviar👇",
+            "¡Hola linda! aca abajo tenes toda la info⬇️",
+            "¡Hola geniaa! Te pasé los datos✅, cualquier cosa me avisas.",
+            "¡Buenas! ¿Cómo estás?💞 Te envié la información.",
+            "¡Hola bella! Te envié los datos aca abajo⬇️⬇️",
+            "Hola querida, ¿cómo estás?❣️ Te envié la info.",
+            "Holaa querida!. Aca tenes los datos para cargar✅.",
+            "¡Hola hermosaa! Te envié la info✅"
+        ];
+
+        const randomIndex = Math.floor(Math.random() * femaleGreetings.length);
+        return femaleGreetings[randomIndex];
+    }
+
+    // Función para generar el mensaje con saludo femenino
+    function generateMessageWithFemGreeting() {
+        const greeting = getRandomFemGreeting();
+        const data = shuffleData();
+
+        let message = `${greeting}\n\n`;
+        data.forEach(item => {
+            message += `${item.label}: ${item.value}\n`;
+        });
+
+        message += `\n${getRandomWarningMessage()}`;
+        return message.trim();
+    }
+
+    // Función para generar el mensaje Info G1
+    function generateInfoG1Message() {
+        const infoMessages = [
+            "¿Cómo vas? Te cuento que desde ahora, todas las CARGAS y RETIROS los vas a gestionar desde un grupo exclusivo. En un ratito te mando el link para que te unas. Ahí nuestro equipo de atención te va a dar una mano. Este grupo es solo para vos, nadie más. Cuando entres, solo decime si querés RETIRAR o CARGAR. ¡Gracias! 💖",
+            "¡Hola! ¿Todo bien? Te aviso que ahora las CARGAS y RETIROS se hacen en un grupo privado. Te voy a pasar el link para que te unas. En ese grupo, nuestro equipo está para ayudarte. Es solo para vos, nadie más. Una vez dentro, avísame si querés RETIRAR o CARGAR. ¡Gracias! 🌟",
+            "¡Ey! ¿Cómo andas? A partir de ahora, las CARGAS y RETIROS los vas a tener que pedir desde un grupo exclusivo. Te voy a mandar el link para que te unas, y ahí nuestro equipo te va a asistir con todo lo que necesites. Este grupo es único para vos, no hay nadie más. Cuando entres, solo tirame si querés RETIRAR o CARGAR. ¡Gracias! 💙",
+            "¿Cómo estás? Te comento que desde ahora, las solicitudes de CARGAS y RETIROS van a ir por un grupo privado. Te paso el link para que te unas, y ahí el equipo de atención te va a ayudar. Este grupo es solo para vos, nadie más. Dentro, solo decime si querés RETIRAR o CARGAR. ¡Gracias! 💕",
+            "¡Hola! ¿Cómo va todo? Te aviso que ahora las CARGAS y RETIROS los vas a tener que gestionar desde un grupo privado. En un rato te paso el link para que te unas. En ese grupo, nuestro equipo te va a asistir. Este grupo es exclusivo para vos, nadie más. Al ingresar, solo decime si querés RETIRAR o CARGAR. ¡Gracias! ✨",
+            "¿Qué tal? Desde ahora, las CARGAS y los RETIROS los vas a pedir en un grupo privado. Te mando el link para que te unas. En ese grupo está el equipo para ayudarte en todo lo que necesites. Es solo para vos, no hay nadie más. Cuando entres, solo avísame si querés RETIRAR o CARGAR. ¡Gracias! 💖",
+            "¡Hola! ¿Cómo estás? Te cuento que ahora, todas las solicitudes de CARGAS y RETIROS las vas a hacer en un grupo privado. Te paso el link para que te unas. En ese grupo, el equipo de atención te va a ayudar con todo. Este grupo es solo para vos, nadie más. Una vez que entres, solo decime si querés RETIRAR o CARGAR. ¡Gracias! 🌸"
+        ];
+
+        const randomIndex = Math.floor(Math.random() * infoMessages.length);
+        return infoMessages[randomIndex];
+    }
+
+    // Función para generar el mensaje Info G2
+    function generateInfoG2Message() {
+        const infoMessages = [
+            "A partir de ahora, las CARGAS y los RETIROS tenés que solicitarlos por acá en lugar de por privado 🌟. Te recuerdo que este grupo es solo para vos, NO hay más clientes, solo nuestro equipo de atención. Si tenés alguna duda, no dudes en preguntarme 🤲🏻.",
+            "Desde ahora, todas las CARGAS y RETIROS los vas a solicitar por acá, en vez de por privado 🍃. Este grupo es solo para vos, NO hay otros clientes, solo nuestro equipo listo para ayudarte. Cualquier consulta, avisame sin problema 🤗.",
+            "A partir de ahora, tanto las CARGAS como los RETIROS se gestionan por aquí, no por privado 🌼. Este grupo es exclusivo para vos, NO hay más clientes, solo nuestro equipo de atención. Si necesitas algo, preguntame con confianza 🤲🏻.",
+            "A partir de ahora, las CARGAS y RETIROS se solicitan aquí, en vez de por privado 🌱. Este grupo es exclusivamente para vos, NO hay otros clientes, solo nosotros para ayudarte. Si tenés alguna duda, escribime sin problema 🤗.",
+            "Desde ahora, tanto las CARGAS como los RETIROS los vas a pedir por acá en lugar de por privado 🌟. Te recuerdo que este grupo es solo para vos, NO hay más clientes, solo nuestro equipo de atención. Cualquier cosa, no dudes en consultarme 🤲🏻."
+        ];
+
+        const randomIndex = Math.floor(Math.random() * infoMessages.length);
+        return infoMessages[randomIndex];
+    }
+
     // Asignar eventos a los botones
     cbuButton.addEventListener('click', async function() {
-        const message = generateSaludoFMessage(); // Usamos la nueva función para Saludo F
-        document.getElementById('previewText').innerText = message; // Mostrar en vista previa
+        let message;
+        if (Math.random() < 0.5) {
+            message = generateCompactMessage();
+        } else {
+            message = generateDetailedMessage();
+        }
+
+        document.getElementById('previewText').innerText = message;
 
         try {
-            await navigator.clipboard.writeText(message); // Copiar al portapapeles
-            console.log("Mensaje copiado al portapapeles");
+            await navigator.clipboard.writeText(message);
         } catch (err) {
             console.error('Error al copiar el texto: ', err);
         }
@@ -208,6 +279,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     noSaludoButton.addEventListener('click', async function() {
         const message = generateMessageWithoutGreeting();
+
         document.getElementById('previewText').innerText = message;
 
         try {
@@ -219,8 +291,9 @@ document.addEventListener('DOMContentLoaded', function() {
         username.value = '';
     });
 
-    saludoFButton.addEventListener('click', async function() {
-        const message = generateSaludoFMessage();
+    saludoFemButton.addEventListener('click', async function() {
+        const message = generateMessageWithFemGreeting();
+
         document.getElementById('previewText').innerText = message;
 
         try {
@@ -232,7 +305,33 @@ document.addEventListener('DOMContentLoaded', function() {
         username.value = '';
     });
 
-    editButton.addEventListener('click', function() {
-        toggleEditMode();
+    infoG1Button.addEventListener('click', async function() {
+        const message = generateInfoG1Message();
+
+        document.getElementById('previewText').innerText = message;
+
+        try {
+            await navigator.clipboard.writeText(message);
+        } catch (err) {
+            console.error('Error al copiar el texto: ', err);
+        }
+
+        username.value = '';
     });
+
+    // Agregar el evento para el botón Info G2
+    infoG2Button.addEventListener('click', async function() {
+        const message = generateInfoG2Message();
+
+        document.getElementById('previewText').innerText = message;
+
+        try {
+            await navigator.clipboard.writeText(message);
+        } catch (err) {
+            console.error('Error al copiar el texto: ', err);
+        }
+    });
+
+    editButton.addEventListener('click', toggleEditMode);
 });
+
