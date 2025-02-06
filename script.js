@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const cbuButton = document.getElementById('cbuButton');
     const noSaludoButton = document.getElementById('noSaludoButton');
     const editButton = document.getElementById('editButton');
+    const saludoFButton = document.getElementById('saludoFButton'); // Nuevo botón para Saludo F
     
     // Campos de usuario
     const username = document.getElementById('username');
@@ -60,28 +61,21 @@ document.addEventListener('DOMContentLoaded', function() {
         isEditing = !isEditing;
     }
 
-    // Función para obtener un saludo aleatorio
-    function getRandomGreeting() {
+    // Función para obtener un saludo aleatorio (incluye los nuevos saludos para "Saludo F")
+    function getRandomGreetingF() {
         const userName = username.value.trim();
         const greetings = [
-            `¡Holaaa${userName ? ` ${userName}` : ''}! ¿Cómo estás? 😊`,
-            `¡Qué tal${userName ? `, ${userName}` : ''}❤️ ¿Cómo te va?`,
-            `¡Buenas buenaas${userName ? `, ${userName}` : ''}, como estas?🙌`,
-            `¡Hola${userName ? ` ${userName}` : ''}! ¿Cómo va todo? 😄`,
-            `¡Hola${userName ? ` ${userName}` : ''}!  Ahora te paso❤️`,
-            `¡Buenas${userName ? `, ${userName}` : ''}! ¿Qué tal todo?`,
-            `¡Como estas${userName ? `, ${userName}` : ''}?`,
-            `¡Buenas buenaas${userName ? `, ${userName}` : ''}!!🙌`,
-            `¡Holaaa${userName ? ` ${userName}` : ''} 😄`,
-            `¡Que ondaa${userName ? ` ${userName}` : ''} 😄`,
-            `¡Holiis${userName ? ` ${userName}` : ''}! Te enviee ❤️`,
-            `¡Holaaa${userName ? ` ${userName}` : ''}! Te dejo los datos abajo⬇️ `,
-            `¡Buenaas${userName ? ` ${userName}` : ''}! Te dejo info abajo `,
-            `¡Como estas${userName ? ` ${userName}` : ''}? Te envio la info `,
-            `¡Holaaa${userName ? ` ${userName}` : ''}! Podes enviar aca✅ `,
-            `¡Holaaa${userName ? ` ${userName}` : ''}! Te paso los datos para tu carga 😊`,
-            `¡Buenaas${userName ? ` ${userName}` : ''}! Ahora te paso la data✅ `,
-            `¡Heey${userName ? ` ${userName}` : ''} ¿Cómo estás? 😃`
+            `¡Holisss${userName ? ` ${userName}` : ''} ¿Cómo va todo? ❤️`,
+            `¡Hola, reinaa${userName ? ` ${userName}` : ''}! ¿Cómo va todo? 😄`,
+            `¡Holaaa, bellaa${userName ? ` ${userName}` : ''}! Te paso los datos que pedis 😊`,
+            `¡Qué tal lindaa${userName ? `, ${userName}` : ''}❤️ Acá tenes los datos`,
+            `¡Holaaa, amigaa${userName ? ` ${userName}` : ''}! Podes enviar por acá ✅`,
+            `¡Holaaa, bellaa${userName ? ` ${userName}` : ''}! Te dejo los datos abajo⬇️`,
+            `¡Hola, reinaa${userName ? ` ${userName}` : ''}! ¿Cómo estás? 😘 Te envie la info`,
+            `¡Buenaas amigaa${userName ? ` ${userName}` : ''}! ¿Todo en orden? 😊`,
+            `¡Holaaa, amigaa${userName ? ` ${userName}` : ''}! Aquí te paso la info que necesitás ➡️`,
+            `¡Como estas amiga${userName ? `, ${userName}` : ''}, todo bien? Aquí te mando lo que pediste 📲`,
+            `¡Holaaa, reinaa${userName ? ` ${userName}` : ''}! Te paso los datos para que los puedas enviar👇`
         ];
 
         const randomIndex = Math.floor(Math.random() * greetings.length);
@@ -112,6 +106,21 @@ document.addEventListener('DOMContentLoaded', function() {
         return warningMessages[randomIndex];
     }
 
+    // Función para generar el mensaje completo con el saludo de Saludo F
+    function generateSaludoFMessage() {
+        const greeting = getRandomGreetingF();
+        const data = shuffleData();
+
+        let message = `${greeting}\n\n`;
+        data.forEach(item => {
+            message += `${item.label}: ${item.value}\n`;
+        });
+
+        message += `\n${getRandomWarningMessage()}`;
+        return message.trim();
+    }
+
+    // Función para mezclar los datos
     function shuffleData() {
         const data = [
             { label: 'CBU', value: cbu.value },
@@ -123,7 +132,7 @@ document.addEventListener('DOMContentLoaded', function() {
         return data;
     }
 
-    // Generar el mensaje compacto
+    // Función para generar el mensaje compacto
     function generateCompactMessage() {
         const greeting = getRandomGreeting();
         const data = shuffleData();
@@ -137,7 +146,7 @@ document.addEventListener('DOMContentLoaded', function() {
         return message.trim();
     }
 
-    // Generar el mensaje detallado
+    // Función para generar el mensaje detallado
     function generateDetailedMessage() {
         const data = shuffleData();
         const greeting = getRandomGreeting();
@@ -149,7 +158,7 @@ document.addEventListener('DOMContentLoaded', function() {
                `${getRandomWarningMessage()}`.trim();
     }
 
-    // Generar mensaje sin saludo
+    // Función para generar mensaje sin saludo
     function generateMessageWithoutGreeting() {
         const startMessages = [
             "*Heey, te dejo estos datos para cargar*😀:",
@@ -204,6 +213,20 @@ document.addEventListener('DOMContentLoaded', function() {
 
     noSaludoButton.addEventListener('click', async function() {
         const message = generateMessageWithoutGreeting();
+
+        document.getElementById('previewText').innerText = message;
+
+        try {
+            await navigator.clipboard.writeText(message);
+        } catch (err) {
+            console.error('Error al copiar el texto: ', err);
+        }
+
+        username.value = '';
+    });
+
+    saludoFButton.addEventListener('click', async function() {
+        const message = generateSaludoFMessage();
 
         document.getElementById('previewText').innerText = message;
 
