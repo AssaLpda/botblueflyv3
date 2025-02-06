@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', function() {
             "*No olvides revisar que el CBU o el ALIAS sean correctos antes de realizar la transferencia.*",
             "*Por favor, revisá los datos antes de confirmar la operación✅.*",
             "*Asegúrate de que los datos (ALIAS o CBU) sean correctos antes de proceder*❗️.",
-            "Siempre es recomendable verificar que el ALIAS y el CBU estén correctos antes de hacer la transferencia.⚠️",
+            "Siempre es recomendable verificar que el CBU o el ALIAS estén correctos antes de hacer la transferencia.⚠️",
             "*No te olvides* de comprobar bien los datos antes de enviar el dinero❗️.",
             "Es importante *verificar* que el ALIAS o el CBU sean correctos antes de continuar con la transferencia.",
             "*Revisa* los datos nuevamente para evitar errores en la transferencia.❗",
@@ -165,7 +165,7 @@ document.addEventListener('DOMContentLoaded', function() {
             "Podes enviar aca✅:",
             "Te envié la info⬇️⬇️:",
             "Acá tienes los datos que necesitas:✅",
-            "Estos son los datos para que cargues😊:",
+            "Estos son los datos para que los cargues😊:",
             "Aquí tienes la información para cargar📥:",
             "Te paso los datos que necesitas👉📋:",
             "¡Todo listo! Acá están los datos que pediste😊:",
@@ -193,17 +193,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Asignar eventos a los botones
     cbuButton.addEventListener('click', async function() {
-        let message;
-        if (Math.random() < 0.5) {
-            message = generateCompactMessage();
-        } else {
-            message = generateDetailedMessage();
-        }
-
-        document.getElementById('previewText').innerText = message;
+        const message = generateSaludoFMessage(); // Usamos la nueva función para Saludo F
+        document.getElementById('previewText').innerText = message; // Mostrar en vista previa
 
         try {
-            await navigator.clipboard.writeText(message);
+            await navigator.clipboard.writeText(message); // Copiar al portapapeles
+            console.log("Mensaje copiado al portapapeles");
         } catch (err) {
             console.error('Error al copiar el texto: ', err);
         }
@@ -213,7 +208,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     noSaludoButton.addEventListener('click', async function() {
         const message = generateMessageWithoutGreeting();
-
         document.getElementById('previewText').innerText = message;
 
         try {
@@ -227,7 +221,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     saludoFButton.addEventListener('click', async function() {
         const message = generateSaludoFMessage();
-
         document.getElementById('previewText').innerText = message;
 
         try {
