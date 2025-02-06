@@ -70,6 +70,45 @@
             background-color: #f8f9fa !important; /* Fondo claro para el modo claro */
             color: #333 !important; /* Texto oscuro en modo claro */
         }
+
+        /* Estilo personalizado para el botón Saludo Fem */
+        .btn-pink {
+            background-color: #f1a7c1; /* Rosa suave */
+            border-color: #f18fb1;
+            color: white;
+        }
+
+        .btn-pink:hover {
+            background-color: #f18fb1; /* Rosa más intenso en hover */
+            border-color: #f1678c;
+        }
+
+        .btn-pink i {
+            margin-right: 8px;
+        }
+
+        /* Estilo personalizado para los botones Info G1 y Info G2 */
+        .btn-info-g1 {
+            background-color: #8ab6d6; /* Azul suave */
+            border-color: #7a98b2;
+            color: white;
+        }
+
+        .btn-info-g1:hover {
+            background-color: #7a98b2;
+            border-color: #6b8a99;
+        }
+
+        .btn-info-g2 {
+            background-color: #a8dba8; /* Verde suave */
+            border-color: #8ab78d;
+            color: white;
+        }
+
+        .btn-info-g2:hover {
+            background-color: #8ab78d;
+            border-color: #7a9e7a;
+        }
     </style>
 </head>
 <body>
@@ -102,32 +141,47 @@
                     </div>
                 </div>
 
-                <!-- Botones CBU y Editar -->
-<div class="d-flex justify-content-between">
-    <button id="cbuButton" class="btn btn-primary btn-sm">
-        CBU
-    </button>
+                <!-- Botones CBU, Saludo Fem, y Sin Saludo -->
+                <div class="d-flex justify-content-between">
+                    <button id="cbuButton" class="btn btn-primary btn-sm">
+                        CBU
+                    </button>
 
-    <!-- Botón Saludo F -->
-    <button id="saludoFButton" class="btn btn-pink btn-sm" style="background-color: #ffb6c1; color: white;">
-        Saludo F
-    </button>
-    
-    <!-- Botón Sin Saludo -->
-    <button id="noSaludoButton" class="btn btn-secondary btn-sm">
-        Sin Saludo
-    </button>
+                    <!-- Botón Saludo Fem entre CBU y Sin Saludo -->
+                    <button id="saludoFemButton" class="btn btn-pink btn-sm">
+                        <i class="bi bi-heart-fill"></i> Saludo Fem
+                    </button>
+                    
+                    <!-- Botón Sin Saludo -->
+                    <button id="noSaludoButton" class="btn btn-secondary btn-sm">
+                        Sin Saludo
+                    </button>
+                    
 
-    <button id="editButton" class="btn btn-warning btn-sm">
-        <i class="bi bi-pencil-square"></i> Editar
-    </button>
-</div>
-
-        <!-- Botón Desconectar centrado -->
+                    <button id="editButton" class="btn btn-warning btn-sm">
+                        <i class="bi bi-pencil-square"></i> Editar
+                    </button>
+                    
+                </div>
+                <!-- Botón Desconectar centrado -->
         <div class="mt-3 text-center">
             <button id="logoutButton" class="btn btn-danger">
                 Desconectar
             </button>
+            </div>
+        </div>
+
+        
+            <!-- Botones Info G1 y Info G2 -->
+        <div class="d-flex justify-content-between mt-3">
+            <button id="infoG1Button" class="btn btn-info-g1 btn-sm">
+                Info G1
+            </button>
+            <button id="infoG2Button" class="btn btn-info-g2 btn-sm">
+                Info G2
+            </button>
+        </div>
+            
         </div>
 
         <!-- Vista previa del mensaje -->
@@ -135,6 +189,8 @@
             <h4>Vista Previa del Mensaje</h4>
             <p id="previewText" class="p-3  rounded shadow">Aún no has generado el mensaje.</p>
         </div>
+
+        
     </div>
 
     <!-- Botón de Modo Oscuro (foquito) -->
@@ -225,5 +281,9 @@
     </script>
 </body>
 </html>
+
+
+
+
 
 
