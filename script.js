@@ -130,13 +130,13 @@ document.addEventListener('DOMContentLoaded', function() {
         const startMessages = [
             "*Heey, te dejo estos datos para cargar*😀:",
             "Podes enviar aca✅:",
-            "Te envié la info⬇️⬇️:",
-            "Acá tienes los datos que necesitas:✅",
-            "Estos son los datos para que cargues😊:",
+            "Te envié la info para tu c4rg4⬇️⬇️:",
+            "Acá tienes los datos que necesitas para c4rgar:✅",
+            "Estos son los datos para que cargu3s😊:",
             "Aquí tienes la información para cargar📥:",
-            "Te paso los datos que necesitas👉📋:",
-            "¡Todo listo! Acá están los datos que pediste😊:",
-            "Aquí tienes los detalles para cargar:",
+            "Te dejo el CBU/ALIAS para envi4r👉:",
+            "¡Todo listo! Acá están los datos tu c4rga😊:",
+            "Aquí tienes los detalles para carg4r:",
             "Ahi te mando, te los dejo por aquí👇:",
             "Todo en orden? Acá están los datos✅:",
             "Te envie los datos justo aquí:",
@@ -334,6 +334,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     editButton.addEventListener('click', toggleEditMode);
 });
+
 
 
 
